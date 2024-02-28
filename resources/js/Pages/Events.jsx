@@ -7,6 +7,12 @@ export default function Events({ auth, events}) {
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">All Events</h2>}
         >
+            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                {/* <NavLink href={route('events.index')} active={route().current('events.*')}>
+                    Events
+                </NavLink> */}
+                <h2>Hello</h2>
+            </div>
             <Head title="Dashboard" />
 
             <div className="py-12">

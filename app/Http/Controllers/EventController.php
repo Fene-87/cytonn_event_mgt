@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\Event;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -26,7 +28,11 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $countries = Country::all();
+
+        return Inertia::render('NewEvent', [
+            'countries' => $countries
+        ]);
     }
 
     /**
@@ -34,7 +40,14 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required|string|max:255',
+        // ]);
+
+        // return Inertia::render('YourView', [
+        //     'errors' => $validator->errors()->toArray(),
+        // ]);
     }
 
     /**
