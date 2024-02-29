@@ -6,17 +6,18 @@ import { Inertia } from '@inertiajs/inertia';
 import { Link } from '@inertiajs/react';
 import axios from 'axios';
 
-export default function Events({ auth, events, errors, countries}) {
-    
+export default function Events({ auth, event, errors, countries}) {
+    const eventId = event.id;
+
     const { data, setData } = useForm({
-        country_id: '',
-        city_id: '',
-        title: '',
-        venue: '',
-        start_date: '',
-        end_date: '',
-        num_tickets: '',
-        description: '',
+        country_id: event.country_id || '',
+        city_id: event.country_id || '',
+        title: event.title || '',
+        venue: event.venue || '',
+        start_date: event.start_date || '',
+        end_date: event.end_date || '',
+        num_tickets: event.num_tickets || '',
+        description: event.description || '',
         cities: []
     });
 
@@ -35,12 +36,13 @@ export default function Events({ auth, events, errors, countries}) {
         
     }
 
-    const onSubmit = async (event) => {
+    const onSubmit = async (e) => {
         console.log(data);
-        event.preventDefault();
+        e.preventDefault();
 
         try {
-            const response = await axios.post(`/events`, data);
+            console.log(eventId);
+            const response = await axios.put(`/events/${event.id}`, data);
             if (response.status === 200) {
                 Inertia.visit(route('events.index'));
             } else {
@@ -55,7 +57,7 @@ export default function Events({ auth, events, errors, countries}) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">New Event</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit Event</h2>}
         >
             <Head title="Dashboard" />
 
@@ -63,7 +65,7 @@ export default function Events({ auth, events, errors, countries}) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <form 
                        method='POST'
-                       action="{{ route('events.store') }}"
+                       action="{{ route('events.update') }}"
                        onSubmit={onSubmit}
                        encType="multipart/form-data"
                        className='p-4 bg-white dark:bg-slate-800 rounded-md'>
@@ -83,7 +85,7 @@ export default function Events({ auth, events, errors, countries}) {
                                 {errors.title && <div className='text-sm text-red-400'>{ errors.title }</div>}
                             </div>
 
-                            {/* <div>
+                            <div>
                                 <label htmlFor="country_id" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Country</label>
                                 <select 
                                   id='country_id'
@@ -116,7 +118,7 @@ export default function Events({ auth, events, errors, countries}) {
                                     ))}
                                 </select>
                                 {errors.city_id && <div className='text-sm text-red-400'>{ errors.city_id }</div>}
-                            </div> */}
+                            </div>
 
                             <div>
                                 <label htmlFor="venue" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Venue</label>
@@ -198,7 +200,7 @@ export default function Events({ auth, events, errors, countries}) {
                             <button
                               type='submit'
                               className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md p-2 mt-4'>
-                                Submit
+                                Update
                             </button>
                         </div>
 

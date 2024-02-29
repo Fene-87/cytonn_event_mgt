@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/new', [EventController::class, 'create'])->name('events.create');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::post('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+    Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

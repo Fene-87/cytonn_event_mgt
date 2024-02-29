@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 use App\Models\Country;
 use App\Models\Event;
 use App\Models\Tag;
@@ -69,18 +70,24 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        // $countries = Country::all();
+        // $countries = Country::with('city')->get();
+        $countries = Country::with('cities')->get();
 
         return Inertia::render('EventEdit', [
-            'event' => $event
+            'event' => $event,
+            'countries' => $countries
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        $data = $request->validated();
+        $data['slug'] = Str::slug($request->title);
+        $event->update($data);
     }
 
     /**
