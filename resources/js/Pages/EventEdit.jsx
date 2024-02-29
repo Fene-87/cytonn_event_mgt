@@ -83,7 +83,7 @@ export default function Events({ auth, events, errors, countries}) {
                                 {errors.title && <div className='text-sm text-red-400'>{ errors.title }</div>}
                             </div>
 
-                            <div>
+                            {/* <div>
                                 <label htmlFor="country_id" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Country</label>
                                 <select 
                                   id='country_id'
@@ -116,7 +116,7 @@ export default function Events({ auth, events, errors, countries}) {
                                     ))}
                                 </select>
                                 {errors.city_id && <div className='text-sm text-red-400'>{ errors.city_id }</div>}
-                            </div>
+                            </div> */}
 
                             <div>
                                 <label htmlFor="venue" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Venue</label>

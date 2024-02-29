@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateEventRequest;
 use App\Models\Country;
 use App\Models\Event;
+use App\Models\Tag;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class EventController extends Controller
@@ -16,7 +19,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        $events = Event::with('city')->get();
 
         return Inertia::render('Events', [
             'events' => $events
@@ -29,6 +32,7 @@ class EventController extends Controller
     public function create()
     {
         $countries = Country::all();
+        $tags = Tag::all();
 
         return Inertia::render('NewEvent', [
             'countries' => $countries
@@ -38,12 +42,14 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateEventRequest $request)
     {
-        
-        // $validator = Validator::make($request->all(), [
-        //     'title' => 'required|string|max:255',
-        // ]);
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+        $data['slug'] = Str::slug($request->title);
+
+        Event::create($data);
+        return Inertia::location(route('events.index'));
 
         // return Inertia::render('YourView', [
         //     'errors' => $validator->errors()->toArray(),
@@ -61,9 +67,12 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Event $event)
     {
-        //
+
+        return Inertia::render('EventEdit', [
+            'event' => $event
+        ]);
     }
 
     /**
