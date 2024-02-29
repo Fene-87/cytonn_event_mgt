@@ -2,9 +2,20 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import NavLink from '@/Components/NavLink';
 import { InertiaLink } from '@inertiajs/inertia-react';
+import { Inertia } from '@inertiajs/inertia';
 import { Link } from '@inertiajs/react';
 
 export default function Events({ auth, events}) {
+    const handleDelete = (id) => {
+        if (confirm('Are you sure you want to delete this event?')) {
+            Inertia.delete(route('events.destroy', id), {
+                onSuccess: () => {
+                    Inertia.visit(route('events.index'));
+                },
+            });
+        }
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -47,6 +58,10 @@ export default function Events({ auth, events}) {
                                             <Link href={route('events.edit', { event: event.id })} active={route().current('events.*') ? 'active' : ''} className="text-green-400 hover:text-green-600">
                                                 Edit
                                             </Link>
+                                            <span> | </span>
+                                            <button onClick={() => handleDelete(event.id)} className="text-red-400 hover:text-red-600">
+                                               Delete
+                                            </button>
                                             {/* <NavLink href={route('events.edit', { event: event.id })} active={route().current('events.*')} className="text-green-400 hover:text-green-600">
                                                 Edit
                                             </NavLink> */}
@@ -54,7 +69,11 @@ export default function Events({ auth, events}) {
                                     </tr>
                                 ))
                                 ) : (
-                                    <h1>No Events</h1>
+                                    <tr>
+                                        <td className='px-6 py-4 text-center text-gray-500 dark:text-gray-400'>
+                                            No Events Found
+                                        </td>
+                                    </tr>
                                 )}
                             </tbody>
                         </table>

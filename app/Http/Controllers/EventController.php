@@ -11,6 +11,7 @@ use App\Models\Tag;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class EventController extends Controller
@@ -93,8 +94,10 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Event $event)
     {
-        //
+        $event->delete();
+
+        return Redirect::route('events.index')->with('success', 'Event deleted successfully.');
     }
 }
