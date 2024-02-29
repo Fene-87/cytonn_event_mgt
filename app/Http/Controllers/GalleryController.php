@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -12,7 +15,12 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        // $galleries = Gallery::all();
+        $galleries = auth()->user()->galleries;
+
+        return Inertia::render('Gallery', [
+            'galleries' => $galleries
+        ]);
     }
 
     /**
@@ -20,7 +28,8 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        //
+        $galleries = auth()->user()->galleries;
+        return Inertia::render('NewGallery', []);
     }
 
     /**
@@ -28,7 +37,22 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'caption' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        if($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('galleries', 'public');
+            auth()->user()->galleries()->create([
+                'caption' => $request->input('caption'),
+                'image' => $imagePath
+            ]);
+
+            return redirect()->route('galleries.index');
+        };
+
+        return back();
     }
 
     /**
@@ -42,24 +66,42 @@ class GalleryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Gallery $gallery)
     {
-        //
+        return Inertia::render('GalleryEdit', [
+            'gallery' => $gallery,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Gallery $gallery)
     {
-        //
+        // $path = $gallery->image;
+        $this->validate($request, [
+            'caption' => 'required',
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        // if($request->hasFile('image')){
+        //     Storage::delete($gallery->image);
+        //     $imagePath = $request->file('image')->store('galleries', 'public'); 
+        // }
+        $gallery->update([
+            'caption' => $request->input('caption'),
+            // 'image' => $imagePath
+        ]);
+        return to_route('galleries.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Gallery $gallery)
     {
-        //
+        Storage::delete($gallery->image);
+        $gallery->delete();
+        return back();
     }
 }

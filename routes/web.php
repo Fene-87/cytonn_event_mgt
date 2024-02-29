@@ -40,6 +40,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 
+    Route::get('/galleries', [GalleryController::class, 'index'])->name('galleries.index');
+    Route::get('/galleries/new', [GalleryController::class, 'create'])->name('galleries.create');
+    Route::post('/galleries', [GalleryController::class, 'store'])->name('galleries.store');
+    Route::post('/galleries/{gallery}/edit', [GalleryController::class, 'edit'])->name('galleries.edit');
+    Route::put('/galleries/{gallery}', [GalleryController::class, 'update'])->name('galleries.update');
+    Route::delete('/galleries/{gallery}', [GalleryController::class, 'delete'])->name('galleries.delete');
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
