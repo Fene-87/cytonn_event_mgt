@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Country;
 use Illuminate\Foundation\Application;
@@ -27,6 +28,8 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/home', HomeController::class)->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
