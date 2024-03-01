@@ -1,3 +1,96 @@
+# Cytonn Events
+
+# 📗 Table of Contents
+  - [🛠 Built With ](#-built-with-)
+    - [Tech Stack ](#tech-stack-)
+    - [Key Features ](#key-features-)
+  - [💻 Getting Started ](#-getting-started-)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Install](#install)
+    - [Usage](#usage)
+  - [👥 Author ](#-author-)
+  - [🤝 Contributing ](#-contributing-)
+  - [⭐️ Show your support ](#️-show-your-support-)
+  - [🙏 Acknowledgments ](#-acknowledgments-)
+  - [📝 License ](#-license-)
+
+# 📖 Project Description <a name="about-project"></a>
+
+This is a Laravel/React ticket booking application for events
+
+
+## 🛠 Built With <a name="built-with"></a>
+
+### Tech Stack <a name="tech-stack"></a>
+
+  <ul>
+    <li>Laravel</li>
+  </ul>
+  <ul>
+    <li>React</li>
+  </ul>
+  <ul>
+    <li>MySQL</li>
+  </ul>
+
+### Key Features <a name="key-features"></a>
+
+- **CRUD of Events**
+- **Reserve Event**
+- **Like Event**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🚀 Video Demo <a name="live-demo"></a>
+
+Click on the link to view the app.
+
+- [Video Demo](https://vimeo.com/918326378/9c48db10d9?share=copy)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## 💻 Getting Started <a name="getting-started"></a>
+
+To get a local copy up and running, follow these steps.
+
+### Prerequisites
+
+In order to run this project you need:
+
+- Composer
+- IDE VS Code
+- XAMPP
+- Node
+
+### SetUp
+
+Clone this Repository to your desired folder:
+
+``` sh
+cd my-folder
+git clone https://github.com/Fene-87/cytonn_event_mgt.git
+```
+### Install 
+Install this project with:
+ 
+``` sh
+composer install
+npm install
+```
+
+### Usage
+To run the project, execute the following commands:
+``` sh
+php artisan migrate:fresh --seed
+php artisan serve
+npm run dev
+```
+There is an existing migration to prepopulate the countries and cities tables.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -63,4 +156,47 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 👥 Author <a name="author"></a>
+👤 **Mark Fenekayas**
+
+- GitHub: [@Fene-87](https://github.com/Fene-87)
+- LinkedIn: [@Mark Fenekayas](https://www.linkedin.com/in/mark-fenekayas/)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🔭 Future Features <a name="future-features"></a>
+
+- [Implement sending of email after successful reservation]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## 🤝 Contributing <a name="contributing"></a>
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## ⭐️ Show your support <a name="support"></a>
+
+If you like this project consider giving it a star ⭐️.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🙏 Acknowledgments <a name="acknowledgements"></a>
+
+I would like to thank Cytonn Investments for this platform to showcase my skills as well as continuous learning.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 📝 License <a name="license"></a>
+
+This project is [MIT](./LICENSE) licensed.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
