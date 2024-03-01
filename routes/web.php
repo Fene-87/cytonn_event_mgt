@@ -1,13 +1,18 @@
 <?php
 
 use App\Http\Controllers\AttendinController;
+use App\Http\Controllers\AttendingEventController;
 use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventIndexController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\GalleryIndexController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\LikedEventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaveController;
+use App\Http\Controllers\SavedEventController;
 use App\Models\Country;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +29,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/auth', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -33,15 +38,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/home', HomeController::class)->name('home');
+Route::get('/', HomeController::class)->name('home');
+Route::get('/home/events', EventIndexController::class)->name('eventIndex');
 Route::get('/home/event/{event}', DetailsController::class)->name('details');
+Route::get('/home/gallery', GalleryIndexController::class)->name('galleryIndex');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/events', [EventController::class, 'index'])->name('events.index');
+    Route::get('/admin/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/new', [EventController::class, 'create'])->name('events.create');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::post('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
@@ -66,6 +73,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/events', EventController::class);
     Route::resource('/galleries', GalleryController::class);
+
+    Route::get('/liked-events', LikedEventController::class)->name('likedEvents');
+    Route::get('/saved-events', SavedEventController::class)->name('savedEvents');
+    Route::get('/attending-events', AttendingEventController::class)->name('attendingEvents');
 
     Route::get('/countries/{country}', function (Country $country) {
         return response()->json($country->cities);

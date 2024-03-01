@@ -7,17 +7,17 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class HomeController extends Controller
+class EventIndexController extends Controller
 {
     /**
      * Handle the incoming request.
      */
     public function __invoke()
     {
-        $events = Event::with('city')->where('start_date', '>=', today())->orderBy('created_at', 'desc')->get();
+        $events = Event::with('city')->orderBy('created_at', 'desc')->paginate(12);
 
-        return Inertia::render('Home', [
-            'events' => $events
+        return Inertia::render('EventIndex', [
+            'events' => $events->items()
         ]);
     }
 }

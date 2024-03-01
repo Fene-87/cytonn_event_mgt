@@ -5,23 +5,18 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import { Inertia } from '@inertiajs/inertia';
 import { Link } from '@inertiajs/react';
 
-export default function Events({ auth, events}) {
-    const handleDelete = (id) => {
-        if (confirm('Are you sure you want to delete this event?')) {
-            Inertia.delete(route('events.destroy', id), {
-                onSuccess: () => window.location.reload(),
-            });
-        }
-    };
-
+export default function LikedEvents({ auth, events}) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">All Events</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Attending Events</h2>}
         >
             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                {/* <NavLink href={route('events.index')} active={route().current('events.*')}>
+                    Events
+                </NavLink> */}
             </div>
-            <Head title="Dashboard" />
+            <Head title="Attending" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -36,7 +31,7 @@ export default function Events({ auth, events}) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {events ? (
+                                {events && events.length > 0 ? (
                                      events.map((event) => (
                                     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
                                         <th scope='row' className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
@@ -49,16 +44,9 @@ export default function Events({ auth, events}) {
                                             {event.city.name}
                                         </td>
                                         <td className='px-6 py-4'>
-                                            <Link href={route('events.edit', { event: event.id })} active={route().current('events.*') ? 'active' : ''} className="text-green-400 hover:text-green-600">
-                                                Edit
+                                            <Link href={route('details', { event: event.id })} active={route().current('events.*') ? 'active' : ''} className="text-green-400 hover:text-green-600">
+                                                View
                                             </Link>
-                                            <span> | </span>
-                                            <button onClick={() => handleDelete(event.id)} className="text-red-400 hover:text-red-600">
-                                               Delete
-                                            </button>
-                                            {/* <NavLink href={route('events.edit', { event: event.id })} active={route().current('events.*')} className="text-green-400 hover:text-green-600">
-                                                Edit
-                                            </NavLink> */}
                                         </td>
                                     </tr>
                                 ))
