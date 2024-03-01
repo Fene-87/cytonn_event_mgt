@@ -7,15 +7,34 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import axios from 'axios';
 
-export default function EventDetails({ auth, event, like }) {
-    // const handleLikes = async () => {
-    //     try {
-    //         const response = await axios.post(`like-event/${event.id}`);
-    //         console.log(response.data);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
+export default function EventDetails({ auth, event, like, savedEvent, attending }) {
+    const handleLikes = async () => {
+        try {
+            const response = await axios.post(`/events-like/${event.id}`);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleSavedEvents = async () => {
+        try {
+            const response = await axios.post(`/events-save/${event.id}`);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleAttendings = async () => {
+        try {
+            const response = await axios.post(`/events-attending/${event.id}`);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -72,23 +91,67 @@ export default function EventDetails({ auth, event, like }) {
 
                                             {auth.user ? (
                                                 <div className='flex space-x-2 p-4'>
-                                                    <button 
-                                                      type="button" 
-                                                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md"
-                                                    //   onClick={handleLikes}
-                                                    >
-                                                        Like
-                                                        
-                                                    </button>
-                                                    <buton type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Save</buton>
-                                                    <buton type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Attending</buton>
+                                                    {like ?  (
+                                                        <button 
+                                                            type="button" 
+                                                            className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none p-2 rounded-md"
+                                                            onClick={handleLikes}
+                                                        >
+                                                            Liked
+                                                        </button>
+                                                    ) : (
+                                                        <button 
+                                                            type="button" 
+                                                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md"
+                                                            onClick={handleLikes}
+                                                        >
+                                                            Like 
+                                                        </button>
+                                                    )}
+
+                                                    {savedEvent ? (
+                                                        <button 
+                                                            type="button" 
+                                                            className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none p-2 rounded-md"
+                                                            onClick={handleSavedEvents}
+                                                        >
+                                                            Saved
+                                                        </button>
+                                                    ) : (
+                                                        <button 
+                                                            type="button" 
+                                                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md"
+                                                            onClick={handleSavedEvents}
+                                                        >
+                                                            Save
+                                                        </button>
+                                                    )}
+
+                                                    {attending ? (
+                                                        <button 
+                                                            type="button" 
+                                                            className="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none p-2 rounded-md"
+                                                            onClick={handleAttendings}
+                                                        >
+                                                            Attending
+                                                        </button>
+                                                    ) : (
+                                                        <button 
+                                                            type="button" 
+                                                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md"
+                                                            onClick={handleAttendings}
+                                                        >
+                                                            Attend
+                                                        </button>
+                                                    )}
+                                                    
                                                 </div>
                                             ) : (
                                                 <div className='flex space-x-2 p-4 items-center'>
                                                     <h3>Login to:</h3>
-                                                    <buton type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Like</buton>
-                                                    <buton type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Save</buton>
-                                                    <buton type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Attending</buton>
+                                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Like</button>
+                                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Save</button>
+                                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Attending</button>
                                                 </div>
                                             )}
                                             

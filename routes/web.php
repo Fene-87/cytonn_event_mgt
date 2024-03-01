@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AttendinController;
 use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SaveController;
 use App\Models\Country;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+
+    Route::post('/events-like/{id}', LikeController::class)->name('events.like');
+    Route::post('/events-save/{id}', SaveController::class)->name('events.save');
+    Route::post('/events-attending/{id}', AttendinController::class)->name('events.attending');
 
     Route::get('/galleries', [GalleryController::class, 'index'])->name('galleries.index');
     Route::get('/galleries/new', [GalleryController::class, 'create'])->name('galleries.create');

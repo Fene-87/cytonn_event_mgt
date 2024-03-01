@@ -50,6 +50,11 @@ class Event extends Model
         return $this-> hasMany(Like::class);
     }
 
+    public function savedEvents(): HasMany
+    {
+        return $this-> hasMany(SavedEvent::class);
+    }
+
     public function attendings(): HasMany
     {
         return $this-> hasMany(Attending::class);
