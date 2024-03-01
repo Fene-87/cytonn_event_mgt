@@ -133,7 +133,7 @@ export default function EventDetails({ auth, event, like, savedEvent, attending 
                                                             className="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none p-2 rounded-md"
                                                             onClick={handleAttendings}
                                                         >
-                                                            Attending
+                                                            Reserved
                                                         </button>
                                                     ) : (
                                                         <button 
@@ -141,7 +141,7 @@ export default function EventDetails({ auth, event, like, savedEvent, attending 
                                                             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md"
                                                             onClick={handleAttendings}
                                                         >
-                                                            Attend
+                                                            Reserve
                                                         </button>
                                                     )}
                                                     
@@ -151,7 +151,7 @@ export default function EventDetails({ auth, event, like, savedEvent, attending 
                                                     <h3>Login to:</h3>
                                                     <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Like</button>
                                                     <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Save</button>
-                                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Attending</button>
+                                                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none p-2 rounded-md">Reserve</button>
                                                 </div>
                                             )}
                                             
@@ -171,9 +171,15 @@ export default function EventDetails({ auth, event, like, savedEvent, attending 
 
                                     <div className='w-full shrink-0 grow-0 basis-auto lg:w-6/12 lg:pl-6'>
                                         <h3 className='mb-4 text-2xl font-bold'>Welcome to {event.title}</h3>
+                                        
+                                        <div>
                                         <div className='mb-4 flex items-center text-sm font-medium text-danger dark:text-danger-500'>
                                             {event.country.name}, {event.city.name}
+                            
                                         </div>
+                                        <span className="text-sm text-gray-500 dark:text-gray-300">VIP-{event.vip_price}/= | Regular-{event.regular_price}/=</span>
+                                        </div>
+                                        
                                         <p className='mb-6 text-sm text-neutral-500 dark:text-neutral-400'>{event.start_date}</p>
                                         <p className='mb-6 text-neutral-500 dark:text-neutral-400'>{event.description}</p>
                                         {auth.user ? (

@@ -86,7 +86,11 @@ export default function Dashboard({ auth, events }) {
                                                 <a href={route('details', { event: event.id })} className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
                                                     {event.title}
                                                 </a>
+
+                                            
                                                 
+                                                <span className="text-sm text-gray-500 dark:text-gray-300">VIP-{event.vip_price}/= | Regular-{event.regular_price}/=</span>
+
                                                 <span className="text-sm text-gray-500 dark:text-gray-300">{event.city.name}</span>
                                                 <span className="text-sm text-gray-500 dark:text-gray-300">On: {event.start_date}</span>
                                             </div>

@@ -20,6 +20,9 @@ export default function Events({ auth, events}) {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">All Events</h2>}
         >
             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <Link href="/events/new" className="text-gray-400 hover:text-gray-600 text-3xl">
+                    Add Event
+                </Link>
             </div>
             <Head title="Dashboard" />
 
@@ -32,6 +35,8 @@ export default function Events({ auth, events}) {
                                     <th scope='col' className='px-6 py-3'>Title</th>
                                     <th scope='col' className='px-6 py-3'>Start Date</th>
                                     <th scope='col' className='px-6 py-3'>City</th>
+                                    <th scope='col' className='px-6 py-3'>Vip</th>
+                                    <th scope='col' className='px-6 py-3'>Regular</th>
                                     <th scope='col' className='px-6 py-3'>Action</th>
                                 </tr>
                             </thead>
@@ -47,6 +52,12 @@ export default function Events({ auth, events}) {
                                         </td>
                                         <td className='px-6 py-4'>
                                             {event.city.name}
+                                        </td>
+                                        <td className='px-6 py-4'>
+                                            {event.vip_price}/=
+                                        </td>
+                                        <td className='px-6 py-4'>
+                                            {event.regular_price}/=
                                         </td>
                                         <td className='px-6 py-4'>
                                             <Link href={route('events.edit', { event: event.id })} active={route().current('events.*') ? 'active' : ''} className="text-green-400 hover:text-green-600">

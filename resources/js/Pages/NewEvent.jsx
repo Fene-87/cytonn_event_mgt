@@ -16,6 +16,8 @@ export default function Events({ auth, events, errors, countries}) {
         start_date: '',
         end_date: '',
         num_tickets: '',
+        vip_price: '',
+        regular_price: '',
         description: '',
         cities: []
     });
@@ -57,7 +59,7 @@ export default function Events({ auth, events, errors, countries}) {
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">New Event</h2>}
         >
-            <Head title="Dashboard" />
+            <Head title="New Event" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -161,6 +163,34 @@ export default function Events({ auth, events, errors, countries}) {
                             </div>
 
                             <div>
+                                <label htmlFor="vip-price" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Vip Price</label>
+                                <input 
+                                  type="number"
+                                  id="vip-price"
+                                  name="vip-price"
+                                  value={data.vip_price}
+                                  onChange={(e) => setData('vip_price', e.target.value)}
+                                  className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500'
+                                  placeholder='Vip Price'
+                                />
+                                {errors.vip_price && <div className='text-sm text-red-400'>{ errors.vip_price }</div>}
+                            </div>
+
+                            <div>
+                                <label htmlFor="regular-price" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Regular Price</label>
+                                <input 
+                                  type="number"
+                                  id="regular-price"
+                                  name="regular-price"
+                                  value={data.regular_price}
+                                  onChange={(e) => setData('regular_price', e.target.value)}
+                                  className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500'
+                                  placeholder='Regular Price'
+                                />
+                                {errors.regular_price && <div className='text-sm text-red-400'>{ errors.regular_price }</div>}
+                            </div>
+
+                            <div>
                                 <label htmlFor="num_tickets" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>No of Tickets</label>
                                 <input 
                                   type="number"
@@ -189,24 +219,21 @@ export default function Events({ auth, events, errors, countries}) {
                             </div>
                         </div>
 
-                        <div>
-                            <h3 className='mb-4 font-semibold text-gray-900 dark:text-white'>Tags</h3>
-                            <ul className='items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg'></ul>
-                        </div>
-
-                        <div>
+                        <div className='flex items-center justify-between'>
                             <button
                               type='submit'
                               className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md p-2 mt-4'>
                                 Submit
                             </button>
+
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <Link href={route('events.index')} active={route().current('events.*') ? 'active' : ''}>
+                                    Back to Events
+                                </Link>
+                            </div>
                         </div>
 
-                        <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                          <Link href={route('events.index')} active={route().current('events.*') ? 'active' : ''}>
-                              Back to Events
-                          </Link>
-                      </div>
+                        
                     </form>
                     
                 </div>

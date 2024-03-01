@@ -19,10 +19,12 @@ export default function Gallery({ auth, galleries}) {
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Galleries</h2>}
         >
-            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            
+            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
+                <Link href="/galleries/new" className="text-gray-400 hover:text-gray-600 text-3xl">
+                    Add Gallery
+                </Link>
             </div>
-            <Head title="Dashboard" />
+            <Head title="Gallery" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

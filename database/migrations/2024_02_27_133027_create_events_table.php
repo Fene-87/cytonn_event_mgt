@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('end_date');
             $table->string('venue');
             $table->integer('num_tickets');
+            $table->integer('vip_price');
+            $table->integer('regular_price');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('country_id')->constrained();
             $table->foreignId('city_id')->constrained();

@@ -28,6 +28,8 @@ class UpdateEventRequest extends FormRequest
             'end_date' =>'required',
             'country_id' =>'required',
             'city_id' =>'required',
+            'vip_price' =>'required',
+            'regular_price' =>'required',
             'description' =>'required',
             'num_tickets' =>'required',
         ];

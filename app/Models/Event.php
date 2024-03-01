@@ -19,6 +19,8 @@ class Event extends Model
         'start_date',
         'end_date',
         'venue',
+        'vip_price',
+        'regular_price',
         'num_tickets',
         'user_id',
         'country_id',
@@ -33,6 +35,11 @@ class Event extends Model
     public function country(): BelongsTo
     {
         return $this-> belongsTo(Country::class);
+    }
+
+    public function ticket(): BelongsTo
+    {
+        return $this-> belongsTo(Ticket::class);
     }
 
     public function city(): BelongsTo

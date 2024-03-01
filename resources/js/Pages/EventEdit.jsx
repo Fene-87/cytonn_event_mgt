@@ -16,6 +16,8 @@ export default function Events({ auth, event, errors, countries}) {
         venue: event.venue || '',
         start_date: event.start_date || '',
         end_date: event.end_date || '',
+        vip_price: event.vip_price || '',
+        regular_price: event.regular_price || '',
         num_tickets: event.num_tickets || '',
         description: event.description || '',
         cities: []
@@ -163,6 +165,34 @@ export default function Events({ auth, event, errors, countries}) {
                             </div>
 
                             <div>
+                                <label htmlFor="vip-price" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Vip Price</label>
+                                <input 
+                                  type="number"
+                                  id="vip-price"
+                                  name="vip-price"
+                                  value={data.vip_price}
+                                  onChange={(e) => setData('vip_price', e.target.value)}
+                                  className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500'
+                                  placeholder='Vip Price'
+                                />
+                                {errors.vip_price && <div className='text-sm text-red-400'>{ errors.vip_price }</div>}
+                            </div>
+
+                            <div>
+                                <label htmlFor="regular-price" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Regular Price</label>
+                                <input 
+                                  type="number"
+                                  id="regular-price"
+                                  name="regular-price"
+                                  value={data.regular_price}
+                                  onChange={(e) => setData('regular_price', e.target.value)}
+                                  className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500'
+                                  placeholder='Regular Price'
+                                />
+                                {errors.regular_price && <div className='text-sm text-red-400'>{ errors.regular_price }</div>}
+                            </div>
+
+                            <div>
                                 <label htmlFor="num_tickets" className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>No of Tickets</label>
                                 <input 
                                   type="number"
@@ -196,19 +226,20 @@ export default function Events({ auth, event, errors, countries}) {
                             <ul className='items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg'></ul>
                         </div>
 
-                        <div>
+                        <div className='flex items-center justify-between'>
                             <button
                               type='submit'
                               className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-md p-2 mt-4'>
                                 Update
                             </button>
+
+                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <Link href={route('events.index')} active={route().current('events.*') ? 'active' : ''}>
+                                    Back to Events
+                                </Link>
+                            </div>
                         </div>
 
-                        <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                          <Link href={route('events.index')} active={route().current('events.*') ? 'active' : ''}>
-                              Back to Events
-                          </Link>
-                      </div>
                     </form>
                     
                 </div>
