@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetailsController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
@@ -30,6 +31,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', HomeController::class)->name('home');
+Route::get('/home/event/{event}', DetailsController::class)->name('details');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
